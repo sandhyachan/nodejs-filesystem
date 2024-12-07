@@ -11,10 +11,22 @@ function createDirectory() {
 }
 
 function createFile() {
-    fileSys.appendFileSync('./timestamp/date-time.txt', 'The current date and time as of India is' + dateTime() + '/n', 'utf8')
+    fileSys.appendFileSync('./timestamp/date-time.txt', 'The current date and time as of India is ' + dateTime() + '\n', 'utf8')
+}
+
+function retrieveFiles() {
+    try {const dirFiles = fileSys.readdirSync('./timestamp')
+    const textFiles = dirFiles.filter((file)=>file.endsWith('.txt'))
+    return textFiles
+}
+    catch(err){
+        console.log(err)
+        return []
+    }
 }
 
 module.exports = {
     createDirectory,
-    createFile
+    createFile,
+    retrieveFiles
 }
